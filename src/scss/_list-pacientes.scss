@@ -1,0 +1,97 @@
+ul.list-items {
+  width: 100%;
+  margin: 0;
+  margin-top: 20px;
+  li {
+    &.titles {
+      font-weight: 500;
+      color: $greyLight;
+      font-size: 0.8rem;
+      padding: 5px 15px;
+      font-weight: bold;
+    }
+    &.item {
+      background-color: white;
+      padding: 10px 15px;
+      margin: 8px 0;
+      color: $greyDark;
+      font-size: 1rem;
+      .row > div {
+        display: flex;
+        align-items: center;
+      }
+      .list-tags {
+        display: flex;
+      }
+      .item-tag {
+        font-size: 0.7rem;
+        color: white;
+        background-color: $greyLight;
+        border-radius: 6px;
+        font-weight: bold;
+        padding: 2px 8px;
+        margin-right: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-transform: uppercase;
+        &.green {
+          background-color: #c6ce35;
+        }
+        &.red {
+          background-color: #e63838;
+        }
+      }
+      .name {
+        a {
+          text-decoration: none;
+          color: $primaryDark;
+          transition: 0.3s;
+          text-transform: capitalize;
+          &:hover {
+            color: $greyLight;
+            span {
+              background-color: $greyLight;
+            }
+          }
+        }
+        span {
+          width: 30px;
+          height: 30px;
+          display: inline-flex;
+          align-items: center;
+          border-radius: 100%;
+          background-color: $primary;
+          color: white;
+          font-weight: bold;
+          justify-content: center;
+          font-size: 0.8rem;
+          margin-right: 8px;
+          transition: 0.3s;
+          text-transform: uppercase;
+        }
+      }
+      .date {
+        &.red {
+          color: #e63838;
+          font-weight: 400;
+        }
+      }
+      .phone {
+        font-size: 0.9rem;
+        a {
+          margin-right: 6px;
+        }
+      }
+      .last-procedures {
+        overflow: hidden;
+      }
+      .menu-actions {
+        display: flex;
+        li {
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+}

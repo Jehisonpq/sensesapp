@@ -1,0 +1,66 @@
+.form-control {
+  font-weight: 300;
+  &::placeholder {
+    color: #d2d2d2;
+    opacity: 1;
+  }
+}
+
+label {
+  font-weight: 400;
+}
+
+small {
+  color: $greyLight;
+}
+
+.btn-primary {
+  background-color: $primary;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px 25px;
+  outline: 0;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: $primaryDark;
+  }
+  &.locked {
+    opacity: 0.3;
+    cursor: not-allowed;
+    &:hover {
+      background-color: $primary;
+    }
+  }
+  &.sent {
+    pointer-events: none;
+    opacity: 0.3;
+    &:hover {
+      background-color: $primary;
+    }
+  }
+}
+
+.link-primary {
+  color: $primary;
+  font-weight: 400;
+  text-decoration: underline;
+  &:hover {
+    color: $primaryDark;
+  }
+}
+
+.nav-tabs {
+  .nav-item {
+    cursor: pointer;
+    .nav-link {
+      text-transform: capitalize;
+    }
+  }
+}
+
+.container-forms {
+  max-width: 960px;
+}

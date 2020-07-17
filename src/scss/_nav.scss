@@ -1,0 +1,84 @@
+.nav.nav-primary {
+    grid-area: nav;
+    background-color: white;
+    height: 100%;
+    nav {
+        width: 100%;
+        position: relative;
+        .active-menu{
+            background-color: $primary;
+            width: 5px;
+            height: 38px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 0.3s;
+        }
+        ul {
+            padding-top: 40px;
+            width: inherit;
+            li {
+                padding: 6px 0 6px 70px;
+                width: inherit;
+                background-position: 30px center;
+                background-repeat: no-repeat;
+                &.section-agenda {
+                    background-image: url('../images/icon-agenda.png');
+                    &.active {
+                        background-image: url('../images/icon-agenda-hover.png');
+                    }
+                }
+                &.section-pacientes {
+                    background-image: url('../images/icon-pacientes.png');
+                    &.active {
+                        background-image: url('../images/icon-pacientes-hover.png');
+                    }
+                }
+                &.section-ventas {
+                    background-image: url('../images/icon-ventas.png');
+                    &.active {
+                        background-image: url('../images/icon-ventas-hover.png');
+                    }
+                }
+                &.section-reportes {
+                    background-image: url('../images/icon-reportes.png');
+                    &.active {
+                        background-image: url('../images/icon-reportes-hover.png');
+                    }
+                }
+                &.section-configuracion {
+                    background-image: url('../images/icon-configuracion.png');
+                    &.active {
+                        background-image: url('../images/icon-configuracion-hover.png');
+                    }
+                }
+                a {
+                    color: $greyLight;
+                    font-size: 1.1rem;
+                    font-weight: 400;
+                    text-decoration: none;
+                    width: inherit;
+                    display: inline-block;
+                    transition: 0.3s;
+                }
+                &.active {
+                    position: relative;
+                    a {
+                        color: $primary;
+                        font-weight: 300;
+                    }
+                    &:hover {
+                        a {
+                            color: $primary;
+                        }
+                    } 
+                }
+                &:hover {
+                    a {
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}

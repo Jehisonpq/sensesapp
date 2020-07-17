@@ -1,0 +1,36 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: $fontPrimary;
+    overflow: hidden;
+    font-weight: 300;
+}
+
+h5 {
+    color: $primary;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
+    }
+}
+
+#root {
+    display: grid;
+    grid-template: 50px 1fr / 220px 1fr;
+    grid-template-areas: "header header" "nav main_content";
+    height: 100vh;
+}
+
+.content {
+    grid-area: main_content;
+    background-color: #f9fbfc;
+    height: 100%;
+    padding: 25px;
+    overflow-y: scroll;
+}
