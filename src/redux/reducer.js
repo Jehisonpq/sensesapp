@@ -7,6 +7,7 @@ const initialState = {
   infoClinic: [],
   setting: [],
   isLoading: false,
+  isUpdating: false,
   error: null,
 };
 
@@ -103,6 +104,48 @@ function reducer(state = initialState, action) {
         ...state,
         isLoading: false,
         pacientes: null,
+        error: action.error,
+      };
+    case "UPDATE_INFOCLINIC_START":
+      return {
+        ...state,
+        isUpdating: true,
+        infoClinic: [],
+        error: null,
+      };
+    case "UPDATE_INFOCLINIC_SUCCESS":
+      return {
+        ...state,
+        isUpdating: false,
+        error: false,
+        infoClinic: action.payload,
+      };
+    case "UPDATE_INFOCLINIC_ERROR":
+      return {
+        ...state,
+        isUpdating: false,
+        infoClinic: null,
+        error: action.error,
+      };
+    case "UPDATE_SETTINGS_CLINIC_START":
+      return {
+        ...state,
+        isUpdating: true,
+        infoClinic: [],
+        error: null,
+      };
+    case "UPDATE_SETTINGS_CLINIC_SUCCESS":
+      return {
+        ...state,
+        isUpdating: false,
+        error: false,
+        infoClinic: action.payload,
+      };
+    case "UPDATE_SETTINGS_CLINIC_ERROR":
+      return {
+        ...state,
+        isUpdating: false,
+        infoClinic: null,
         error: action.error,
       };
     default:

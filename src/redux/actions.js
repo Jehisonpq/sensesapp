@@ -89,3 +89,61 @@ export function getProcedimientos() {
       });
   };
 }
+
+export function updateInfoClinic(dataForm) {
+  return (dispatch) => {
+    dispatch({ type: "UPDATE_INFOCLINIC_START" });
+
+    db.collection("info_clinic")
+      .doc("AKtpYVg6lHRySHcFa9EN")
+      .update(dataForm)
+      .then(() => {
+        console.log("Document successfully updated!");
+
+        db.collection("info_clinic")
+          .doc("AKtpYVg6lHRySHcFa9EN")
+          .get()
+          .then((info) => {
+            dispatch({
+              type: "UPDATE_INFOCLINIC_SUCCESS",
+              payload: info.data(),
+            });
+          })
+          .catch((error) => {
+            dispatch({ type: "UPDATE_INFOCLINIC_ERROR", error });
+          });
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+      });
+  };
+}
+
+export function updateSettingsClinic(dataForm) {
+  return (dispatch) => {
+    dispatch({ type: "UPDATE_SETTINGS_CLINIC_START" });
+
+    db.collection("setting")
+      .doc("jK8ga1JxZdqy5em32PYB")
+      .update(dataForm)
+      .then(() => {
+        console.log("Document successfully updated!");
+
+        db.collection("setting")
+          .doc("jK8ga1JxZdqy5em32PYB")
+          .get()
+          .then((info) => {
+            dispatch({
+              type: "UPDATE_SETTINGS_CLINIC_SUCCESS",
+              payload: info.data(),
+            });
+          })
+          .catch((error) => {
+            dispatch({ type: "UPDATE_SETTINGS_CLINIC_ERROR", error });
+          });
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+      });
+  };
+}
