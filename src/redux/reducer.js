@@ -131,7 +131,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         isUpdating: true,
-        infoClinic: [],
+        setting: [],
         error: null,
       };
     case "UPDATE_SETTINGS_CLINIC_SUCCESS":
@@ -139,13 +139,13 @@ function reducer(state = initialState, action) {
         ...state,
         isUpdating: false,
         error: false,
-        infoClinic: action.payload,
+        setting: action.payload,
       };
     case "UPDATE_SETTINGS_CLINIC_ERROR":
       return {
         ...state,
         isUpdating: false,
-        infoClinic: null,
+        setting: null,
         error: action.error,
       };
     default:

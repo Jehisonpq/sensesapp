@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { updateInfoClinic, updateSettingsClinic } from "../redux/actions";
 import NavTabDay from "../components/nav-tab-days";
@@ -9,8 +10,8 @@ const SettingsForm = () => {
   const setting = useSelector((state) => state.setting);
   const isUpdating = useSelector((state) => state.isUpdating);
   const dispatch = useDispatch();
-
   const listDays = setting.days;
+  const { register, errors, handleSubmit } = useForm();
 
   const handleRenderNavTabs = () => {
     if (!listDays) return;
@@ -26,20 +27,25 @@ const SettingsForm = () => {
     if (!listDays) return;
 
     const tabsContent = listDays.map((item, index) => (
-      <ContentTabDay key={index} id={index} day={item.day}></ContentTabDay>
+      <ContentTabDay
+        key={index}
+        id={index}
+        day={item.day}
+        interval={item.interval}
+        opening_hours={item.opening_hours}
+        active={item.active}
+      ></ContentTabDay>
     ));
 
     return tabsContent;
   };
 
-  const sendDataInfoClinic = (event) => {
-    event.preventDefault();
-
+  const sendDataInfoClinic = (data) => {
     const dataForm = {
-      name: event.target.clinic_name.value,
-      phone: event.target.clinic_phone.value,
-      address: event.target.clinic_address.value,
-      email: event.target.clinic_email.value,
+      name: data.clinic_name,
+      phone: data.clinic_phone,
+      address: data.clinic_address,
+      email: data.clinic_email,
     };
 
     dispatch(updateInfoClinic(dataForm));
@@ -52,6 +58,92 @@ const SettingsForm = () => {
       number_procedures_patients_list:
         event.target.number_procedures_patients_list.value,
       period_duration: event.target.period_duration.value,
+      days: [
+        {
+          day: "lunes",
+          active: event.target.dayCheck0.checked,
+          opening_hours: [
+            event.target.opening_hours_from0.value,
+            event.target.opening_hours_to0.value,
+          ],
+          interval: [
+            event.target.interval_from0.value,
+            event.target.interval_to0.value,
+          ],
+        },
+        {
+          day: "martes",
+          active: event.target.dayCheck1.checked,
+          opening_hours: [
+            event.target.opening_hours_from1.value,
+            event.target.opening_hours_to1.value,
+          ],
+          interval: [
+            event.target.interval_from1.value,
+            event.target.interval_to1.value,
+          ],
+        },
+        {
+          day: "miércoles",
+          active: event.target.dayCheck2.checked,
+          opening_hours: [
+            event.target.opening_hours_from2.value,
+            event.target.opening_hours_to2.value,
+          ],
+          interval: [
+            event.target.interval_from2.value,
+            event.target.interval_to2.value,
+          ],
+        },
+        {
+          day: "jueves",
+          active: event.target.dayCheck3.checked,
+          opening_hours: [
+            event.target.opening_hours_from3.value,
+            event.target.opening_hours_to3.value,
+          ],
+          interval: [
+            event.target.interval_from3.value,
+            event.target.interval_to3.value,
+          ],
+        },
+        {
+          day: "viernes",
+          active: event.target.dayCheck4.checked,
+          opening_hours: [
+            event.target.opening_hours_from4.value,
+            event.target.opening_hours_to4.value,
+          ],
+          interval: [
+            event.target.interval_from4.value,
+            event.target.interval_to4.value,
+          ],
+        },
+        {
+          day: "sábado",
+          active: event.target.dayCheck5.checked,
+          opening_hours: [
+            event.target.opening_hours_from5.value,
+            event.target.opening_hours_to5.value,
+          ],
+          interval: [
+            event.target.interval_from5.value,
+            event.target.interval_to5.value,
+          ],
+        },
+        {
+          day: "domingo",
+          active: event.target.dayCheck6.checked,
+          opening_hours: [
+            event.target.opening_hours_from6.value,
+            event.target.opening_hours_to6.value,
+          ],
+          interval: [
+            event.target.interval_from6.value,
+            event.target.interval_to6.value,
+          ],
+        },
+      ],
     };
 
     dispatch(updateSettingsClinic(dataForm));
@@ -139,7 +231,7 @@ const SettingsForm = () => {
           <h5>Información de la clínica</h5>
           <hr />
           <div className="info-general">
-            <form onSubmit={sendDataInfoClinic}>
+            <form onSubmit={handleSubmit(sendDataInfoClinic)}>
               <div className="form-row">
                 <div className="form-group col">
                   <label htmlFor="clinic_name">Nombre Clínica*</label>
@@ -150,8 +242,18 @@ const SettingsForm = () => {
                     name="clinic_name"
                     placeholder="Nombre clínica*"
                     defaultValue={infoClinic.name}
-                    required
+                    ref={register({
+                      required: {
+                        value: true,
+                        message: "Nombre es requerido",
+                      },
+                    })}
                   />
+                  <span className="d-block mb-2">
+                    <small className="text-danger">
+                      {errors?.clinic_name?.message}
+                    </small>
+                  </span>
                 </div>
                 <div className="form-group col">
                   <label htmlFor="clinic_address">Dirección*</label>
@@ -162,8 +264,18 @@ const SettingsForm = () => {
                     name="clinic_address"
                     placeholder="Dirección*"
                     defaultValue={infoClinic.address}
-                    required
+                    ref={register({
+                      required: {
+                        value: true,
+                        message: "Dirección es requerida",
+                      },
+                    })}
                   />
+                  <span className="d-block mb-2">
+                    <small className="text-danger">
+                      {errors?.clinic_address?.message}
+                    </small>
+                  </span>
                 </div>
               </div>
               <div className="form-row">
@@ -176,20 +288,48 @@ const SettingsForm = () => {
                     name="clinic_phone"
                     placeholder="Teléfono*"
                     defaultValue={infoClinic.phone}
-                    required
+                    ref={register({
+                      required: {
+                        value: true,
+                        message: "Teléfono es requerido",
+                      },
+                      pattern: {
+                        value: /^[0-9]+$/,
+                        message: "Ingrese solo números",
+                      },
+                    })}
                   />
+                  <span className="d-block mb-2">
+                    <small className="text-danger">
+                      {errors?.clinic_phone?.message}
+                    </small>
+                  </span>
                 </div>
                 <div className="form-group col">
                   <label htmlFor="clinic_email">E-mail*</label>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     id="clinic_email"
                     name="clinic_email"
                     placeholder="E-mail*"
                     defaultValue={infoClinic.email}
-                    required
+                    ref={register({
+                      required: {
+                        value: true,
+                        message: "E-mail es requerido",
+                      },
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i,
+                        message: "Ingrese un E-mail válido",
+                      },
+                    })}
                   />
+                  <span className="d-block mb-2">
+                    <small className="text-danger">
+                      {errors?.clinic_email?.message}
+                    </small>
+                  </span>
                 </div>
               </div>
               <div className="form-row">
@@ -201,6 +341,7 @@ const SettingsForm = () => {
                       className="form-control"
                       id="clinic_logo"
                       name="clinic_logo"
+                      ref={register}
                     />
                   </div>
                 </div>
